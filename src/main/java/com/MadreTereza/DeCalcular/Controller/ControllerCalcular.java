@@ -15,12 +15,37 @@ public class ControllerCalcular {
         return "telacalculo/TemplateCalculo";
     }
 
-    @PostMapping("/")
-    public String postCalculo(@RequestParam("numerin") String numerin,
-                                Model model){
-        double calculinho = Math.pow(Double.valueOf(numerin), 2);
-
-        model.addAttribute("calculinho", numerin + "² = " + calculinho);
+    @GetMapping("/calcula")
+    public String getCalculadora() {
         return "telacalculo/TemplateCalculo";
+    }
+
+    @PostMapping("/")
+    public String postCalculo(@RequestParam("numerin") double numerin,
+                              @RequestParam("selecao") String operacao,
+                              @RequestParam("numerinDois") double numerinDois,
+                              RedirectAttributes redirectAttributes){
+        double calculinho = 0;
+
+        if (operacao.equals("+")){
+            calculinho = numerin + numerinDois;
+            redirectAttributes.addFlashAttribute("calculinho", numerin + " + " + numerinDois + " = " + calculinho);
+        } else if (operacao.equals("-")){
+            calculinho = numerin - numerinDois;
+            redirectAttributes.addFlashAttribute("calculinho", numerin + " - " + numerinDois + " = " + calculinho);
+        } else if (operacao.equals("*")){
+            calculinho = numerin * numerinDois;
+            redirectAttributes.addFlashAttribute("calculinho", numerin + " * " + numerinDois + " = " + calculinho);
+        } else if (operacao.equals("/")){
+            calculinho = numerin / numerinDois;
+            redirectAttributes.addFlashAttribute("calculinho", numerin + " / " + numerinDois + " = " + calculinho);
+        } else if (operacao.toUpperCase().equals("R")){
+            calculinho = Math.sqrt(numerin);
+            redirectAttributes.addFlashAttribute("calculinho", "√" + numerin + " = " + calculinho);
+        } else if (operacao.toUpperCase().equals("P")){
+            calculinho = Math.pow(numerin, numerinDois);
+            redirectAttributes.addFlashAttribute("calculinho", numerin + "x^" + numerinDois + " = " + calculinho);
+        }
+        return "redirect:/calcula";
     }
 }

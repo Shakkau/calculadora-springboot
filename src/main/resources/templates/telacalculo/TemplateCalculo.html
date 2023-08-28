@@ -10,20 +10,40 @@
           crossorigin="anonymous">
     <script src="https://code.jquery.com/jquery-3.7.0.min.js"
             integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
+    <style>
+        #selec{
+            width: 200px !important;
+            margin: auto;
+        }
+    </style>
     <title>Calculadora</title>
 </head>
 <body>
 <div class="container mt-5">
     <div class="text-center">
-        <h1>Exemplo:</h1>
+        <h1>DUVIDEI FAZER UMA CONTA:</h1>
         <form action="/" method="post">
             <div class="input-group mb-3">
                 <input id="numerin" name="numerin" type="number" class="form-control " aria-label="TextInput" placeholder="Botcheie um numerin ae"
                        aria-describedby="basic-addon2">
             </div>
-            <input type="submit" class="btn btn-primary mt-3"></input>
+            <div id="selec">
+                <select id="selecao" name="selecao" class="form-control mb-3 text-center">
+                    <option value="+">Somar</option>
+                    <option value="-">Subtrair</option>
+                    <option value="*">Multiplicar</option>
+                    <option value="/">Dividir</option>
+                    <option value="P">Potência</option>
+                    <option value="R">Raiz</option>
+                </select>
+            </div>
+            <div class="input-group mb-3">
+                <input id="numerinDois" name="numerinDois" type="number" class="form-control " aria-label="TextInput" placeholder="Botcheie um numerin ae"
+                       aria-describedby="basic-addon2">
+            </div>
+            <input id="botao" type="submit" class="btn btn-primary mt-3"></input>
         </form>
-        <h1 class="mt-5" th:if="${calculinho}" th:text="${calculinho}"></h1>
+        <h1 id="calculinho" class="mt-5" th:if="${calculinho}" th:text="${calculinho}"></h1>
     </div>
 </div>
 </body>
