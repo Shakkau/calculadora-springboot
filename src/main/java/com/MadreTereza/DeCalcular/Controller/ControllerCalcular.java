@@ -1,7 +1,6 @@
 package com.MadreTereza.DeCalcular.Controller;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -23,9 +22,13 @@ public class ControllerCalcular {
     @PostMapping("/")
     public String postCalculo(@RequestParam("numerin") double numerin,
                               @RequestParam("selecao") String operacao,
-                              @RequestParam("numerinDois") double numerinDois,
+                              @RequestParam("numerinDois") String numerinDoisStr,
                               RedirectAttributes redirectAttributes){
         double calculinho = 0;
+        double numerinDois = 0;
+        if (numerinDoisStr != null && !numerinDoisStr.equals("")){
+            numerinDois = Double.parseDouble(numerinDoisStr);
+        }
 
         if (operacao.equals("+")){
             calculinho = numerin + numerinDois;
